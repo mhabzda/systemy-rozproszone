@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "sr.grpc.gen";
+option java_outer_classname = "CurrencyProto";
+option objc_class_prefix = "HLW";
+
+package currency;
+
+enum Currency {
+    PLN = 0;
+    EUR = 1;
+    USD = 2;
+    GBP = 3;
+}
+
+message CurrencyList {
+    repeated Currency chosenCurrencies = 1;
+}
+
+message ExchangeRate {
+    Currency currency = 1;
+    float rate = 2;
+}
+
+service CurrencyService {
+    rpc GetExchangeRates (CurrencyList) returns (stream ExchangeRate) {}
+}
+
